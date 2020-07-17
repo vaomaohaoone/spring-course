@@ -1,0 +1,12 @@
+app:
+  language: ru
+  infinite: false
+
+spring:
+  banner:
+    location: classpath:banner.txt
+  messages:
+    basename: app_bundle
+    encoding: UTF-8
+csv:
+  file: questions
