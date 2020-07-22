@@ -3,10 +3,10 @@ package ru.otus.spring.course.repository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import ru.otus.spring.course.entities.links.BookStyle;
 import ru.otus.spring.course.JdbcTest;
 import ru.otus.spring.course.entities.Book;
 import ru.otus.spring.course.entities.Style;
-import ru.otus.spring.course.entities.links.BookStyle;
 
 import java.util.List;
 import java.util.Optional;
