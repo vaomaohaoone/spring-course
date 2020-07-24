@@ -1,7 +1,6 @@
 package ru.otus.spring.course.repository;
 
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 import ru.otus.spring.course.entities.Comment;
 
 import javax.persistence.EntityManager;
@@ -9,7 +8,6 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 import java.util.UUID;
 
-@Transactional
 @Repository
 public class CommentRepository implements EntityRepository<Comment, UUID>{
 

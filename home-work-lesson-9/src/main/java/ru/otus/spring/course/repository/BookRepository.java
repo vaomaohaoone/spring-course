@@ -1,7 +1,6 @@
 package ru.otus.spring.course.repository;
 
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 import ru.otus.spring.course.entities.Author;
 import ru.otus.spring.course.entities.Book;
 import ru.otus.spring.course.entities.Style;
@@ -11,7 +10,6 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 import java.util.UUID;
 
-@Transactional
 @Repository
 public class BookRepository implements EntityRepository<Book, UUID> {
     @PersistenceContext

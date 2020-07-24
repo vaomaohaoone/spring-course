@@ -1,14 +1,12 @@
 package ru.otus.spring.course.repository;
 
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 import ru.otus.spring.course.entities.Style;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
-@Transactional
 @Repository
 public class StyleRepository implements EntityRepository<Style, String>{
     @PersistenceContext

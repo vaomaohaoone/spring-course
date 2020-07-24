@@ -2,6 +2,7 @@ package ru.otus.spring.course.service;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.otus.spring.course.entities.Author;
 import ru.otus.spring.course.entities.Book;
 import ru.otus.spring.course.entities.Comment;
@@ -18,6 +19,7 @@ import java.util.UUID;
 
 @Service
 @AllArgsConstructor
+@Transactional
 public class AppLibraryServiceImpl implements AppLibraryService{
     private final AuthorRepository authorRepository;
     private final BookRepository bookRepository;
