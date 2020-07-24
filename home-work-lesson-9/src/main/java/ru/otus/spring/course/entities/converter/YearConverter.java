@@ -1,4 +1,4 @@
-package ru.otus.spring.course.entities;
+package ru.otus.spring.course.entities.converter;
 
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;

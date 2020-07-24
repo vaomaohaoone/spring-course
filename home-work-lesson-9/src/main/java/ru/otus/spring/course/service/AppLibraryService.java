@@ -2,6 +2,7 @@ package ru.otus.spring.course.service;
 
 import ru.otus.spring.course.entities.Author;
 import ru.otus.spring.course.entities.Book;
+import ru.otus.spring.course.entities.Comment;
 import ru.otus.spring.course.entities.Style;
 
 import java.time.Year;
@@ -62,4 +63,8 @@ public interface AppLibraryService {
      * @param authorId id автора
      * */
     Set<Book> getAllBooksByAuthor(UUID authorId);
+
+    /**
+     * Метод добавления комментария к книге*/
+    Comment addCommentToBook(UUID isbn, String text);
 }

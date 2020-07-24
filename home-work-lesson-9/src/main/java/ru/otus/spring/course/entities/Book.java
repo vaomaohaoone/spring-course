@@ -2,6 +2,7 @@ package ru.otus.spring.course.entities;
 
 import lombok.*;
 import lombok.experimental.Accessors;
+import ru.otus.spring.course.entities.converter.YearConverter;
 
 import javax.persistence.*;
 import java.time.Year;

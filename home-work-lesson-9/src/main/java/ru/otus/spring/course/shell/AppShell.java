@@ -6,6 +6,7 @@ import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellOption;
 import ru.otus.spring.course.entities.Author;
 import ru.otus.spring.course.entities.Book;
+import ru.otus.spring.course.entities.Comment;
 import ru.otus.spring.course.entities.Style;
 import ru.otus.spring.course.service.AppLibraryService;
 
@@ -80,5 +81,13 @@ public class AppShell {
         }
     }
 
+    @ShellMethod(key = {"create-comment"}, value = "Create comment for book")
+    public void createComment(@ShellOption UUID isbn, @ShellOption String text) {
+        Comment comment = appLibraryService.addCommentToBook(isbn, text);
+        if (comment != null)
+            System.out.println("Comment with id: " + comment.getId() + ", text: " + comment.getText() + ", for book with isbn: " + isbn + " was added");
+        else
+            System.out.println("No such book with isbn: " + isbn);
+    }
 
 }

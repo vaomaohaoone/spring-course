@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.otus.spring.course.entities.Author;
 import ru.otus.spring.course.entities.Book;
+import ru.otus.spring.course.entities.Comment;
 import ru.otus.spring.course.entities.Style;
 import ru.otus.spring.course.repository.AuthorRepository;
 import ru.otus.spring.course.repository.BookRepository;
@@ -53,6 +54,10 @@ public class EntityUtils {
 
     public static Style createStyle() {
         return new Style().setId(rdmString(10));
+    }
+
+    public static Comment createComment(Book book) {
+        return new Comment().setText(rdmString(50)).setBook(book);
     }
 
     private static String rdmString(int length) {

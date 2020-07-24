@@ -9,9 +9,11 @@ import org.springframework.shell.jline.ScriptShellApplicationRunner;
 import ru.otus.spring.course.EntityUtils;
 import ru.otus.spring.course.entities.Author;
 import ru.otus.spring.course.entities.Book;
+import ru.otus.spring.course.entities.Comment;
 import ru.otus.spring.course.entities.Style;
 import ru.otus.spring.course.repository.AuthorRepository;
 import ru.otus.spring.course.repository.BookRepository;
+import ru.otus.spring.course.repository.CommentRepository;
 import ru.otus.spring.course.repository.StyleRepository;
 
 import java.util.UUID;
@@ -32,6 +34,8 @@ public class AppLibraryServiceTest {
     private BookRepository bookRepository;
     @MockBean
     private StyleRepository styleRepository;
+    @MockBean
+    private CommentRepository commentRepository;
     @Autowired
     private AppLibraryService appLibraryService;
 
@@ -190,5 +194,18 @@ public class AppLibraryServiceTest {
 
         assertTrue(appLibraryService.getAllBooksByAuthor(authorId).isEmpty());
         verify(authorRepository).findById(authorId);
+    }
+
+    @Test
+    void createCommentWhenBookExist() {
+        UUID isbn = UUID.randomUUID();
+        Book book = EntityUtils.createBook();
+        Comment comment = EntityUtils.createComment(book);
+        when(bookRepository.findById(isbn)).thenReturn(book);
+        when(commentRepository.save(any(Comment.class))).thenReturn(comment);
+
+        assertEquals(comment, appLibraryService.addCommentToBook(isbn, comment.getText()));
+        verify(bookRepository).findById(isbn);
+        verify(commentRepository).save(any(Comment.class));
     }
 }

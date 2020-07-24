@@ -4,9 +4,11 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.otus.spring.course.entities.Author;
 import ru.otus.spring.course.entities.Book;
+import ru.otus.spring.course.entities.Comment;
 import ru.otus.spring.course.entities.Style;
 import ru.otus.spring.course.repository.AuthorRepository;
 import ru.otus.spring.course.repository.BookRepository;
+import ru.otus.spring.course.repository.CommentRepository;
 import ru.otus.spring.course.repository.StyleRepository;
 
 import java.time.Year;
@@ -20,6 +22,7 @@ public class AppLibraryServiceImpl implements AppLibraryService{
     private final AuthorRepository authorRepository;
     private final BookRepository bookRepository;
     private final StyleRepository styleRepository;
+    private final CommentRepository commentRepository;
 
     @Override
     public Book createBook(String name, Year year) {
@@ -91,5 +94,14 @@ public class AppLibraryServiceImpl implements AppLibraryService{
             return author.getBooks();
         else
             return new HashSet<>();
+    }
+
+    @Override
+    public Comment addCommentToBook(UUID isbn, String text) {
+        Book book = bookRepository.findById(isbn);
+        if(book != null)
+            return commentRepository.save(new Comment().setText(text));
+        else
+            return null;
     }
 }
