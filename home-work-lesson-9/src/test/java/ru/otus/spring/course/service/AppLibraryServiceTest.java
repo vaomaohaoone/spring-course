@@ -11,10 +11,10 @@ import ru.otus.spring.course.entities.Author;
 import ru.otus.spring.course.entities.Book;
 import ru.otus.spring.course.entities.Comment;
 import ru.otus.spring.course.entities.Style;
-import ru.otus.spring.course.repository.AuthorRepository;
-import ru.otus.spring.course.repository.BookRepository;
-import ru.otus.spring.course.repository.CommentRepository;
-import ru.otus.spring.course.repository.StyleRepository;
+import ru.otus.spring.course.repository.AuthorRepositoryImpl;
+import ru.otus.spring.course.repository.BookRepositoryImpl;
+import ru.otus.spring.course.repository.CommentRepositoryImpl;
+import ru.otus.spring.course.repository.StyleRepositoryImpl;
 
 import java.util.UUID;
 
@@ -29,13 +29,13 @@ import static org.mockito.Mockito.*;
         )
 public class AppLibraryServiceTest {
     @MockBean
-    private AuthorRepository authorRepository;
+    private AuthorRepositoryImpl authorRepository;
     @MockBean
-    private BookRepository bookRepository;
+    private BookRepositoryImpl bookRepository;
     @MockBean
-    private StyleRepository styleRepository;
+    private StyleRepositoryImpl styleRepository;
     @MockBean
-    private CommentRepository commentRepository;
+    private CommentRepositoryImpl commentRepository;
     @Autowired
     private AppLibraryService appLibraryService;
 

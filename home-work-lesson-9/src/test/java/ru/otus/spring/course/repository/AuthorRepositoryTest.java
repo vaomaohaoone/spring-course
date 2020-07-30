@@ -15,11 +15,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 @DataJpaTest
-@Import(AuthorRepository.class)
+@Import(AuthorRepositoryImpl.class)
 public class AuthorRepositoryTest {
 
     @Autowired
-    private AuthorRepository authorRepository;
+    private AuthorRepositoryImpl authorRepository;
 
     @Autowired
     private TestEntityManager em;

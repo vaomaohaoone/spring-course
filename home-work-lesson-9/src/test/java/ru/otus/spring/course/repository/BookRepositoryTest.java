@@ -16,14 +16,14 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
-@Import({BookRepository.class, AuthorRepository.class, StyleRepository.class})
+@Import({BookRepositoryImpl.class, AuthorRepositoryImpl.class, StyleRepositoryImpl.class})
 public class BookRepositoryTest {
     @Autowired
-    private BookRepository bookRepository;
+    private BookRepositoryImpl bookRepository;
     @Autowired
-    private AuthorRepository authorRepository;
+    private AuthorRepositoryImpl authorRepository;
     @Autowired
-    private StyleRepository styleRepository;
+    private StyleRepositoryImpl styleRepository;
 
     @Autowired
     private TestEntityManager em;

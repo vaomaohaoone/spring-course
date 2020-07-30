@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellOption;
+import org.springframework.transaction.annotation.Transactional;
 import ru.otus.spring.course.entities.Author;
 import ru.otus.spring.course.entities.Book;
 import ru.otus.spring.course.entities.Comment;
@@ -62,7 +63,7 @@ public class AppShell {
             System.out.println("No such book with isbn: " + isbn);
     }
 
-
+    @Transactional
     @ShellMethod(key = {"get-all-authors-for-book", "get-authors"}, value = "Get all authors for book by isbn")
     public void getAllAuthorsOfBook(@ShellOption UUID isbn) {
         Set<Author> authors = appLibraryService.getAllAuthorsOfBook(isbn);
@@ -72,6 +73,7 @@ public class AppShell {
         }
     }
 
+    @Transactional
     @ShellMethod(key = {"get-all-books-by-author-id", "get-books"}, value = "Get all bookds by author id")
     public void getAllBooksByAuthor(@ShellOption UUID authorId) {
         Set<Book> books = appLibraryService.getAllBooksByAuthor(authorId);

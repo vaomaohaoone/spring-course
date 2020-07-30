@@ -15,10 +15,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 @DataJpaTest
-@Import(StyleRepository.class)
+@Import(StyleRepositoryImpl.class)
 public class StyleRepositoryTest {
     @Autowired
-    private StyleRepository styleRepository;
+    private StyleRepositoryImpl styleRepository;
 
     @Autowired
     private TestEntityManager em;

@@ -7,9 +7,9 @@ import ru.otus.spring.course.entities.Author;
 import ru.otus.spring.course.entities.Book;
 import ru.otus.spring.course.entities.Comment;
 import ru.otus.spring.course.entities.Style;
-import ru.otus.spring.course.repository.AuthorRepository;
-import ru.otus.spring.course.repository.BookRepository;
-import ru.otus.spring.course.repository.StyleRepository;
+import ru.otus.spring.course.repository.AuthorRepositoryImpl;
+import ru.otus.spring.course.repository.BookRepositoryImpl;
+import ru.otus.spring.course.repository.StyleRepositoryImpl;
 
 import java.time.Year;
 import java.util.HashSet;
@@ -17,11 +17,11 @@ import java.util.HashSet;
 @Component
 public class EntityUtils {
     @Autowired
-    private AuthorRepository authorRepository;
+    private AuthorRepositoryImpl authorRepository;
     @Autowired
-    private BookRepository bookRepository;
+    private BookRepositoryImpl bookRepository;
     @Autowired
-    private StyleRepository styleRepository;
+    private StyleRepositoryImpl styleRepository;
 
     public Author createAndSaveAuthor() {
         return authorRepository.save(createAuthor());

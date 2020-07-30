@@ -7,10 +7,10 @@ import ru.otus.spring.course.entities.Author;
 import ru.otus.spring.course.entities.Book;
 import ru.otus.spring.course.entities.Comment;
 import ru.otus.spring.course.entities.Style;
-import ru.otus.spring.course.repository.AuthorRepository;
-import ru.otus.spring.course.repository.BookRepository;
-import ru.otus.spring.course.repository.CommentRepository;
-import ru.otus.spring.course.repository.StyleRepository;
+import ru.otus.spring.course.repository.AuthorRepositoryImpl;
+import ru.otus.spring.course.repository.BookRepositoryImpl;
+import ru.otus.spring.course.repository.CommentRepositoryImpl;
+import ru.otus.spring.course.repository.StyleRepositoryImpl;
 
 import java.time.Year;
 import java.util.HashSet;
@@ -19,14 +19,14 @@ import java.util.UUID;
 
 @Service
 @AllArgsConstructor
-@Transactional
 public class AppLibraryServiceImpl implements AppLibraryService{
-    private final AuthorRepository authorRepository;
-    private final BookRepository bookRepository;
-    private final StyleRepository styleRepository;
-    private final CommentRepository commentRepository;
+    private final AuthorRepositoryImpl authorRepository;
+    private final BookRepositoryImpl bookRepository;
+    private final StyleRepositoryImpl styleRepository;
+    private final CommentRepositoryImpl commentRepository;
 
     @Override
+    @Transactional
     public Book createBook(String name, Year year) {
         return bookRepository.save(new Book()
                 .setName(name)
@@ -34,6 +34,7 @@ public class AppLibraryServiceImpl implements AppLibraryService{
     }
 
     @Override
+    @Transactional
     public Book createBook(String name, Year year, String style) {
         if (styleRepository.findById(style) == null){
             styleRepository.save(new Style().setId(style));
@@ -44,6 +45,7 @@ public class AppLibraryServiceImpl implements AppLibraryService{
     }
 
     @Override
+    @Transactional
     public Author createAuthor(String name, String surname) {
         return authorRepository.save(new Author()
                 .setName(name)
@@ -51,12 +53,14 @@ public class AppLibraryServiceImpl implements AppLibraryService{
     }
 
     @Override
+    @Transactional
     public Style createStyle(String style) {
         return styleRepository.save(new Style()
                 .setId(style));
     }
 
     @Override
+    @Transactional
     public boolean linkAuthorAndBook(UUID authorId, UUID isbn) {
         Author author = authorRepository.findById(authorId);
         Book book = bookRepository.findById(isbn);
@@ -68,6 +72,7 @@ public class AppLibraryServiceImpl implements AppLibraryService{
     }
 
     @Override
+    @Transactional
     public boolean addStyleForBook(UUID isbn, String styleName) {
         Book book = bookRepository.findById(isbn);
         if(book != null) {
@@ -81,6 +86,7 @@ public class AppLibraryServiceImpl implements AppLibraryService{
     }
 
     @Override
+    @Transactional
     public Set<Author> getAllAuthorsOfBook(UUID isbn) {
         Book book = bookRepository.findById(isbn);
         if(book != null)
@@ -90,6 +96,7 @@ public class AppLibraryServiceImpl implements AppLibraryService{
     }
 
     @Override
+    @Transactional
     public Set<Book> getAllBooksByAuthor(UUID authorId) {
         Author author = authorRepository.findById(authorId);
         if (author != null)
@@ -99,6 +106,7 @@ public class AppLibraryServiceImpl implements AppLibraryService{
     }
 
     @Override
+    @Transactional
     public Comment addCommentToBook(UUID isbn, String text) {
         Book book = bookRepository.findById(isbn);
         if(book != null)

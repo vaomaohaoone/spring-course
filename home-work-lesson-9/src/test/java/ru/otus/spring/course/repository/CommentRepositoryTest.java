@@ -16,10 +16,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 @DataJpaTest
-@Import(CommentRepository.class)
+@Import(CommentRepositoryImpl.class)
 public class CommentRepositoryTest {
     @Autowired
-    private CommentRepository commentRepository;
+    private CommentRepositoryImpl commentRepository;
 
     @Autowired
     private TestEntityManager em;
