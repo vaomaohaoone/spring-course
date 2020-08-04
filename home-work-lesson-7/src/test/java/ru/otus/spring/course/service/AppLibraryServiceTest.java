@@ -1,7 +1,6 @@
 package ru.otus.spring.course.service;
 
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.TestConfiguration;
@@ -9,12 +8,12 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.shell.jline.InteractiveShellApplicationRunner;
 import org.springframework.shell.jline.ScriptShellApplicationRunner;
+import ru.otus.spring.course.entities.links.AuthorBook;
+import ru.otus.spring.course.entities.links.BookStyle;
 import ru.otus.spring.course.EntityUtils;
 import ru.otus.spring.course.entities.Author;
 import ru.otus.spring.course.entities.Book;
 import ru.otus.spring.course.entities.Style;
-import ru.otus.spring.course.entities.links.AuthorBook;
-import ru.otus.spring.course.entities.links.BookStyle;
 import ru.otus.spring.course.repository.*;
 
 import javax.sql.DataSource;

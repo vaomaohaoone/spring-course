@@ -1,7 +1,7 @@
 package ru.otus.spring.course.service;
 
-import ru.otus.spring.course.data.Line;
 import ru.otus.spring.course.data.User;
+import ru.otus.spring.course.data.Line;
 
 /**
  * Сервис локализованного ввода/вывода текста
