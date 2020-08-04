@@ -48,12 +48,10 @@ public class BookRepositoryImpl implements BookRepository {
     @Override
     public void linkAuthorAndBook(Author author, Book book) {
         book.addAuthor(author);
-        update(book);
     }
 
     @Override
     public void linkBookAndStyle(Book book, Style style) {
         book.addStyle(style);
-        update(book);
     }
 }
