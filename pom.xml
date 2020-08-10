@@ -15,6 +15,7 @@
         <spring.shell.version>2.0.1.RELEASE</spring.shell.version>
         <lombok.version>1.18.10</lombok.version>
         <opencv.version>4.1</opencv.version>
+        <mongobee.version>0.13</mongobee.version>
         <maven.compiler.target>11</maven.compiler.target>
         <maven.compiler.source>11</maven.compiler.source>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -33,6 +34,7 @@
         <module>home-work-lesson-7</module>
         <module>home-work-lesson-9</module>
         <module>home-work-lesson-11</module>
+        <module>home-work-lesson-13</module>
         <module>home-work-lesson-17</module>
     </modules>
 
