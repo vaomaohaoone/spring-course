@@ -87,12 +87,13 @@ class AuthorEdit extends Component {
         })).json();
 
         for (let i = 0; i < item.books.length; i++){
-            await fetch('/book/isbn/' + item.books[i].id + '/author/' + savedItem.id + '/link', {
+            await fetch('/book/author/link', {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
-                }
+                },
+                body: JSON.stringify({isbn: item.books[i].id, authorId: savedItem.id})
             });
         }
 
@@ -100,12 +101,13 @@ class AuthorEdit extends Component {
         let booksForUnlink = initialBooks.filter(book => bookIds.indexOf(book.id) === -1)
 
         for (let i = 0; i < booksForUnlink.length; i++) {
-            await fetch('/book/isbn/' + booksForUnlink[i].id + '/author/' + item.id + '/unlink', {
+            await fetch('/book/author/unlink', {
                 method: 'DELETE',
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
-                }
+                },
+                body: JSON.stringify({isbn: booksForUnlink[i].id, authorId: item.id})
             });
         }
 
@@ -116,8 +118,7 @@ class AuthorEdit extends Component {
         const {books, item} = this.state;
         const title = <h2>{item.id ? 'Изменение автора' : 'Добавление автора'}</h2>;
         const bookNames = item.books.map(book => {
-            const bookLabel = `${book.name || ''} (${book.publishedYear || ''})`;
-            return bookLabel;
+            return `${book.name || ''} (${book.publishedYear || ''})`;
         })
         let bookOptions = books.filter(function (book) {
                 return bookNames.indexOf(book.label) === -1;

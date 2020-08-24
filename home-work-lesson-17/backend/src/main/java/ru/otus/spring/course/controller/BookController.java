@@ -3,6 +3,8 @@ package ru.otus.spring.course.controller;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ru.otus.spring.course.data.BookAuthorLink;
+import ru.otus.spring.course.data.BookStyleLink;
 import ru.otus.spring.course.documents.Author;
 import ru.otus.spring.course.documents.Book;
 import ru.otus.spring.course.service.BookService;
@@ -50,34 +52,29 @@ public class BookController {
         return bookService.getAll();
     }
 
-    @PostMapping("/name/{name}/year/{publishedYear}")
-    public ResponseEntity<Book> createBook(@PathVariable("name") String name, @PathVariable("publishedYear") Integer publishedYear) {
-        return ResponseEntity.ok(bookService.createBook(name, Year.of(publishedYear)));
-    }
-
     @PostMapping("/name/{name}/year/{publishedYear}/style/{style}")
     public ResponseEntity<Book> createBook(@PathVariable("name") String name, @PathVariable("publishedYear") Integer publishedYear, @PathVariable("style") String style) {
         return ResponseEntity.ok(bookService.createBook(name, Year.of(publishedYear), style));
     }
 
-    @PostMapping("/isbn/{isbn}/author/{authorId}/link")
-    public boolean linkAuthorAndBook(@PathVariable("isbn") String isbn, @PathVariable("authorId") String authorId) {
-        return bookService.linkAuthorAndBook(authorId, isbn);
+    @PostMapping("/author/link")
+    public boolean linkAuthorAndBook(@RequestBody BookAuthorLink bookAuthorLink) {
+        return bookService.linkAuthorAndBook(bookAuthorLink.getAuthorId(), bookAuthorLink.getIsbn());
     }
 
-    @DeleteMapping("/isbn/{isbn}/author/{authorId}/unlink")
-    public boolean unlinkAuthorAndBook(@PathVariable("isbn") String isbn, @PathVariable("authorId") String authorId) {
-        return bookService.unlinkAuthorAndBook(authorId, isbn);
+    @DeleteMapping("/author/unlink")
+    public boolean unlinkAuthorAndBook(@RequestBody BookAuthorLink bookAuthorLink) {
+        return bookService.unlinkAuthorAndBook(bookAuthorLink.getAuthorId(), bookAuthorLink.getIsbn());
     }
 
-    @PostMapping("/isbn/{isbn}/style/{styleName}")
-    public boolean addStyleForBook(@PathVariable("isbn") String isbn, @PathVariable("styleName") String styleName) {
-        return bookService.addStyleForBook(isbn, styleName);
+    @PostMapping("/style/link")
+    public boolean addStyleForBook(@RequestBody BookStyleLink bookStyleLink) {
+        return bookService.addStyleForBook(bookStyleLink.getIsbn(), bookStyleLink.getStyle());
     }
 
-    @DeleteMapping("/isbn/{isbn}/style/{styleName}")
-    public boolean deleteStyleForBook(@PathVariable("isbn") String isbn, @PathVariable("styleName") String styleName) {
-        return bookService.removeStyleForBook(isbn, styleName);
+    @DeleteMapping("/style/unlink")
+    public boolean deleteStyleForBook(@RequestBody BookStyleLink bookStyleLink) {
+        return bookService.removeStyleForBook(bookStyleLink.getIsbn(), bookStyleLink.getStyle());
     }
 
     @GetMapping("/isbn/{isbn}/authors/list")

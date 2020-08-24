@@ -118,12 +118,13 @@ class BookEdit extends Component {
         });
 
         for (let i = 0; i < item.authors.length; i++) {
-            await fetch('/book/isbn/' + item.id + '/author/' + item.authors[i].id + '/link', {
+            await fetch('/book/author/link', {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
-                }
+                },
+                body: JSON.stringify({isbn: item.id, authorId: item.authors[i].id})
             });
         }
 
@@ -131,22 +132,24 @@ class BookEdit extends Component {
         let authorsForUnlink = initialAuthors.filter(author => authorIds.indexOf(author.id) === -1)
 
         for (let i = 0; i < authorsForUnlink.length; i++) {
-            await fetch('/book/isbn/' + item.id + '/author/' + authorsForUnlink[i].id + '/unlink', {
+            await fetch('/book/author/unlink', {
                 method: 'DELETE',
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
-                }
+                },
+                body: JSON.stringify({isbn: item.id, authorId: authorsForUnlink[i].id})
             });
         }
 
         for (let i = 0; i < item.styles.length; i++) {
-            await fetch('/book/isbn/' + item.id + '/style/' + item.styles[i].style, {
+            await fetch('/book/style/link', {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
-                }
+                },
+                body: JSON.stringify({isbn: item.id, style: item.styles[i].style})
             });
         }
 
@@ -155,12 +158,13 @@ class BookEdit extends Component {
         let stylesForUnlink = initialStyles.filter(style => styleIds.indexOf(style.id) === -1)
 
         for (let i = 0; i < stylesForUnlink.length; i++) {
-            await fetch('/book/isbn/' + item.id + '/style/' + stylesForUnlink[i].style, {
+            await fetch('/book/style/unlink', {
                 method: 'DELETE',
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
-                }
+                },
+                body: JSON.stringify({isbn: item.id, style: stylesForUnlink[i].style})
             });
         }
 
@@ -171,12 +175,10 @@ class BookEdit extends Component {
         const {authors, styles, item} = this.state;
         const title = <h2>{item.id ? 'Изменение книги' : 'Добавление книги'}</h2>;
         const authorNames = item.authors.map(author => {
-            const authorName = `${author.name || ''} ${author.surname || ''}`;
-            return authorName;
+            return `${author.name || ''} ${author.surname || ''}`;
         })
         const styleNames = item.styles.map(style => {
-            const styleName = style.style;
-            return styleName;
+            return style.style;
         })
         let authorOptions = authors.filter(function (author) {
                 return authorNames.indexOf(author.label) === -1;

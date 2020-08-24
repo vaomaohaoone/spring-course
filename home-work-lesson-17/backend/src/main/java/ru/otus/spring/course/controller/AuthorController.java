@@ -46,11 +46,6 @@ public class AuthorController {
         return authorService.getAll();
     }
 
-    @PostMapping("/name/{name}/surname/{surname}")
-    public ResponseEntity<Author> createAuthor(@PathVariable String name, @PathVariable String surname) {
-        return ResponseEntity.ok(authorService.createAuthor(name, surname));
-    }
-
     @GetMapping("/id/{authorId}/books/list")
     public Set<Book> getAllBooksByAuthor(@PathVariable String authorId) {
         return authorService.getAllBooksByAuthor(authorId);

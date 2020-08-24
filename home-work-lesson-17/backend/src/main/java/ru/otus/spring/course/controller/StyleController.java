@@ -36,11 +36,6 @@ public class StyleController {
         return styleService.getAll();
     }
 
-    @PostMapping("/name/{name}")
-    public ResponseEntity<Style> createStyle(@PathVariable("name") String name) {
-        return ResponseEntity.ok(styleService.createStyle(name));
-    }
-
     @PutMapping("/{styleId}")
     public ResponseEntity<Style> updateStyle(@PathVariable String styleId, @RequestBody Style style) {
         if (styleService.getStyleById(styleId).isPresent()) {

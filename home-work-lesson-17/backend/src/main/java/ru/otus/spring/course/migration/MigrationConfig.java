@@ -2,6 +2,7 @@ package ru.otus.spring.course.migration;
 
 import com.github.mongobee.changeset.ChangeLog;
 import com.github.mongobee.changeset.ChangeSet;
+import com.mongodb.*;
 
 import java.util.HashSet;
 

@@ -87,13 +87,13 @@ class StyleEdit extends Component {
         });
 
         for (let i = 0; i < item.books.length; i++){
-            await fetch('/book/isbn/' + item.books[i].id + '/style/' + item.style, {
+            await fetch('/book/style/link', {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(item),
+                body: JSON.stringify({isbn: item.books[i].id, style: item.style}),
             });
         }
 
@@ -101,12 +101,13 @@ class StyleEdit extends Component {
         let booksForUnlink = initialBooks.filter(book => bookIds.indexOf(book.id) === -1)
 
         for (let i = 0; i < booksForUnlink.length; i++) {
-            await fetch('/book/isbn/' + booksForUnlink[i].id + '/style/' + item.style, {
+            await fetch('/book/style/unlink', {
                 method: 'DELETE',
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
-                }
+                },
+                body: JSON.stringify({isbn: booksForUnlink[i].id, style: item.style}),
             });
         }
 
@@ -117,8 +118,7 @@ class StyleEdit extends Component {
         const {books, item} = this.state;
         const title = <h2>{item.id ? 'Изменение жанра' : 'Добавление жанра'}</h2>;
         const bookNames = item.books.map(book => {
-            const bookLabel = `${book.name || ''} (${book.publishedYear || ''})`;
-            return bookLabel;
+            return `${book.name || ''} (${book.publishedYear || ''})`;
         })
         let bookOptions = books.filter(function (book) {
                 return bookNames.indexOf(book.label) === -1;
