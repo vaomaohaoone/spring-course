@@ -37,7 +37,6 @@
         <module>home-work-lesson-13</module>
         <module>home-work-lesson-17/backend</module>
         <module>home-work-lesson-20/backend-flux</module>
-        <module>spring-security-auth-login</module>
     </modules>
 
 </project>
