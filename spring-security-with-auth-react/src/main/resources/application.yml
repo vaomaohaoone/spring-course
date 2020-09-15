@@ -1,0 +1,15 @@
+spring:
+  data:
+    mongodb:
+      authentication-database: none
+      port: 27017
+      host: localhost
+      database: library
+logging:
+  level:
+    org:
+      springframework:
+        data:
+          mongodb:
+            core:
+              MongoTemplate: DEBUG
