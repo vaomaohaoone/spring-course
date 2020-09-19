@@ -38,6 +38,7 @@
         <module>home-work-lesson-17/backend</module>
         <module>home-work-lesson-20/backend-flux</module>
         <module>spring-security-with-auth-react</module>
+        <module>spring-security-with-authorization-react</module>
     </modules>
 
 </project>
