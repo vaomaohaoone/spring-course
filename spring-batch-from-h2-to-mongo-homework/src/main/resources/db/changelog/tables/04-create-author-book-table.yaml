@@ -1,0 +1,41 @@
+databaseChangeLog:
+  - property:
+      name: tableName
+      value: author_book
+      global: false
+
+  - changeSet:
+      id: 30092020-1059
+      author: Timofeev Kirill
+      comment: creating table of link book and author
+      preConditions:
+        onFail: MARK_RAN
+        onFailMessage: ${tableName} already exists
+        not:
+          tableExists:
+            tableName: ${tableName}
+      changes:
+        - createTable:
+            tableName: ${tableName}
+            remarks: table of comments
+            columns:
+              - column:
+                  name: book_id
+                  type: CHAR(36)
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    foreignKeyName: fk_link_book
+                    references: book(id)
+              - column:
+                  name: author_id
+                  type: CHAR(36)
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    foreignKeyName: fk_link_author
+                    references: author(id)
+
+      rollback:
+        - dropTable:
+            tableName: ${tableName}

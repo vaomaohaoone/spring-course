@@ -1,0 +1,42 @@
+databaseChangeLog:
+  - property:
+      name: tableName
+      value: comment
+      global: false
+
+  - changeSet:
+      id: 30092020-1059
+      author: Timofeev Kirill
+      comment: creating table of comments
+      preConditions:
+        onFail: MARK_RAN
+        onFailMessage: ${tableName} already exists
+        not:
+          tableExists:
+            tableName: ${tableName}
+      changes:
+        - createTable:
+            tableName: ${tableName}
+            remarks: table of comments
+            columns:
+              - column:
+                  name: id
+                  type: CHAR(36)
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: text
+                  type: VARCHAR2(1000)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: id_book
+                  type: CHAR(36)
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_comment_book
+                    references: book(id)
+      rollback:
+        - dropTable:
+            tableName: ${tableName}

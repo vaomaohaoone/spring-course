@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/tables/01-create-book-table.yaml
+  - include:
+      file: db/changelog/tables/02-create-author-table.yaml
+  - include:
+      file: db/changelog/tables/03-create-comment-table.yaml
+  - include:
+      file: db/changelog/tables/04-create-author-book-table.yaml

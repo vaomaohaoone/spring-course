@@ -1,0 +1,46 @@
+databaseChangeLog:
+  - changeSet:
+      id: 30092020-1259
+      author: Timofeev Kirill
+      comment: insert authors
+      changes:
+        - insert:
+            tableName: author
+            columns:
+              - column:
+                  name: id
+                  value: 70fa5b99-7279-4236-b389-f7713e2036f7
+              - column:
+                  name: name
+                  value: Alex
+              - column:
+                  name: surname
+                  value: Pushkin
+        - insert:
+            tableName: author
+            columns:
+              - column:
+                  name: id
+                  value: 2596c77a-83f0-49da-b4cf-113899d99c4b
+              - column:
+                  name: name
+                  value: Michail
+              - column:
+                  name: surname
+                  value: Bulgakov
+        - insert:
+            tableName: author
+            columns:
+              - column:
+                  name: id
+                  value: 40222d1e-6e2a-4aeb-b131-eeca3e09a231
+              - column:
+                  name: name
+                  value: Lev
+              - column:
+                  name: surname
+                  value: Tolstoy
+      rollback:
+        - delete:
+            tableName: author
+            where: name in ('Alex', 'Michail')

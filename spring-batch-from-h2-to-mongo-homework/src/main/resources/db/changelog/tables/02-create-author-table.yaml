@@ -1,0 +1,40 @@
+databaseChangeLog:
+  - property:
+      name: tableName
+      value: author
+      global: false
+
+  - changeSet:
+      id: 30092020-1054
+      author: Timofeev Kirill
+      comment: creating table of authors
+      preConditions:
+        onFail: MARK_RAN
+        onFailMessage: ${tableName} already exists
+        not:
+          tableExists:
+            tableName: ${tableName}
+      changes:
+        - createTable:
+            tableName: ${tableName}
+            remarks: table of authors
+            columns:
+              - column:
+                  name: id
+                  type: CHAR(36)
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: VARCHAR2(300)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: surname
+                  type: VARCHAR2(300)
+                  constraints:
+                    nullable: false
+      rollback:
+        - dropTable:
+            tableName: ${tableName}
