@@ -1,0 +1,28 @@
+databaseChangeLog:
+  - changeSet:
+      id: 30092020-2314
+      author: Timofeev Kirill
+      comment: insert to author_book table
+      changes:
+        - insert:
+            tableName: author_book
+            columns:
+              - column:
+                  name: book_id
+                  value: 3591026d-817c-4262-9072-95856ec149f5
+              - column:
+                  name: author_id
+                  value: 70fa5b99-7279-4236-b389-f7713e2036f7
+        - insert:
+            tableName: author_book
+            columns:
+              - column:
+                  name: book_id
+                  value: ba866001-f01c-4341-95f2-2b22d890f048
+              - column:
+                  name: author_id
+                  value: 2596c77a-83f0-49da-b4cf-113899d99c4b
+      rollback:
+        - delete:
+            tableName: author_book
+            where: book_id in ('3591026d-817c-4262-9072-95856ec149f5', 'ba866001-f01c-4341-95f2-2b22d890f048')

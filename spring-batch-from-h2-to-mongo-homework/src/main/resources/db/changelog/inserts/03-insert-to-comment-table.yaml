@@ -1,0 +1,58 @@
+databaseChangeLog:
+  - changeSet:
+      id: 30092020-1350
+      author: Timofeev Kirill
+      comment: insert comments
+      changes:
+        - insert:
+            tableName: comment
+            columns:
+              - column:
+                  name: id
+                  value: e0b01cf6-3ea7-4671-a5ff-e76d74de28af
+              - column:
+                  name: text
+                  value: "My favourite book from Alex Pushkin"
+              - column:
+                  name: id_book
+                  value: 3591026d-817c-4262-9072-95856ec149f5
+        - insert:
+            tableName: comment
+            columns:
+              - column:
+                  name: id
+                  value: 113f89db-a5a1-478c-b5c2-58e49f8c583d
+              - column:
+                  name: text
+                  value: "Legend book!!!"
+              - column:
+                  name: id_book
+                  value: ba866001-f01c-4341-95f2-2b22d890f048
+        - insert:
+            tableName: comment
+            columns:
+              - column:
+                  name: id
+                  value: 62611d3c-1488-4ab4-93b7-45ea58adf490
+              - column:
+                  name: text
+                  value: "I often read this fairy tale to children"
+              - column:
+                  name: id_book
+                  value: ba7aedaf-a067-4749-a21c-96a4c205a496
+        - insert:
+            tableName: comment
+            columns:
+              - column:
+                  name: id
+                  value: 3e42662c-bcf0-4df4-ab2e-d0f421f4f2be
+              - column:
+                  name: text
+                  value: "This book is known to everyone in the world"
+              - column:
+                  name: id_book
+                  value: ba866001-f01c-4341-95f2-2b22d890f048
+      rollback:
+        - delete:
+            tableName: comment
+            where: id in ('e0b01cf6-3ea7-4671-a5ff-e76d74de28af', '113f89db-a5a1-478c-b5c2-58e49f8c583d', '62611d3c-1488-4ab4-93b7-45ea58adf490', '3e42662c-bcf0-4df4-ab2e-d0f421f4f2be')

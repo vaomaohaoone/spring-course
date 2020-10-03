@@ -1,0 +1,46 @@
+databaseChangeLog:
+  - changeSet:
+      id: 30092020-1224
+      author: Timofeev Kirill
+      comment: insert books
+      changes:
+        - insert:
+            tableName: book
+            columns:
+              - column:
+                  name: id
+                  value: 3591026d-817c-4262-9072-95856ec149f5
+              - column:
+                  name: name
+                  value: Captains daughter
+              - column:
+                  name: published_year
+                  value: 1836
+        - insert:
+            tableName: book
+            columns:
+              - column:
+                  name: id
+                  value: ba866001-f01c-4341-95f2-2b22d890f048
+              - column:
+                  name: name
+                  value: Master and Margarita
+              - column:
+                  name: published_year
+                  value: 1967
+        - insert:
+            tableName: book
+            columns:
+              - column:
+                  name: id
+                  value: ba7aedaf-a067-4749-a21c-96a4c205a496
+              - column:
+                  name: name
+                  value: Teremok
+              - column:
+                  name: published_year
+                  value: 1452
+      rollback:
+        - delete:
+            tableName: book
+            where: name in ('Captains daughter', 'Master and Margarita', 'Teremok')

@@ -11,7 +11,7 @@
     <packaging>pom</packaging>
 
     <properties>
-        <spring.boot.version>2.2.6.RELEASE</spring.boot.version>
+        <spring.boot.version>2.3.3.RELEASE</spring.boot.version>
         <spring.shell.version>2.0.1.RELEASE</spring.shell.version>
         <lombok.version>1.18.10</lombok.version>
         <opencv.version>4.1</opencv.version>
@@ -39,6 +39,7 @@
         <module>home-work-lesson-20/backend-flux</module>
         <module>spring-security-with-auth-react</module>
         <module>spring-security-with-authorization-react</module>
+        <module>spring-batch-from-h2-to-mongo-homework</module>
     </modules>
 
 </project>
