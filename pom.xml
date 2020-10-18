@@ -40,6 +40,7 @@
         <module>spring-security-with-auth-react</module>
         <module>spring-security-with-authorization-react</module>
         <module>spring-batch-from-h2-to-mongo-homework</module>
+        <module>spring-integration-homework</module>
     </modules>
 
 </project>
