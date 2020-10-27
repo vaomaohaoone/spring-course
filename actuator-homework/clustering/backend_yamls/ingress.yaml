@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: library-backend-ingress
+spec:
+  rules:
+    - host: app.library.backend.otus
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: library-backend
+                port:
+                  number: 8080

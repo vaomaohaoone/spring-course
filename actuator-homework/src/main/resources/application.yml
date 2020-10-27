@@ -1,0 +1,28 @@
+spring:
+  data:
+    mongodb:
+      authentication-database: none
+      port: 27017
+      host: localhost
+      database: library
+
+logging:
+  file:
+    name: /tmp/logs/library/logger.log
+  level:
+    org:
+      springframework:
+        data:
+          mongodb:
+            core:
+              MongoTemplate: DEBUG
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, metrics, logfile, prometheus
+  endpoint:
+    health:
+      show-details: always
+

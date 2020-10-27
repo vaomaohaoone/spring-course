@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: library-backend
+  labels:
+    name: library-backend
+spec:
+  type: NodePort
+  ports:
+    - port: 8080
+      targetPort: 8080
+      nodePort: 30030
+  selector:
+    run: library-backend
