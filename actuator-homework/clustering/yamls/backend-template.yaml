@@ -1,0 +1,85 @@
+kind: Secret
+apiVersion: v1
+metadata:
+  name: mongo-secret
+  namespace: sandbox
+data:
+  MONGO_PASSWORD: cXdlMTIz
+  MONGO_USERNAME: dmFvbWFvaGFv
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: backend-config
+  namespace: sandbox
+data:
+  MONGO_HOST: library-shard-00-00.nnize.mongodb.net:27017,library-shard-00-01.nnize.mongodb.net:27017,library-shard-00-02.nnize.mongodb.net:27017
+  MONGO_DATABASE: library
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: library-backend
+  namespace: sandbox
+spec:
+  selector:
+    matchLabels:
+      run: library-backend
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        run: library-backend
+    spec:
+      dnsPolicy: Default
+      containers:
+        - name: library-backend
+          image: vaomaohao/library-backend:final
+          ports:
+            - containerPort: 8080
+          resources:
+            limits:
+              memory: "1024Mi"
+              cpu: "1000m"
+            requests:
+              memory: "512Mi"
+              cpu: "500m"
+          envFrom:
+            - configMapRef:
+                name: backend-config
+            - secretRef:
+                name: mongo-secret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: library-backend
+  namespace: sandbox
+  labels:
+    name: library-backend
+spec:
+  type: NodePort
+  ports:
+    - port: 8080
+      targetPort: 8080
+      nodePort: 30030
+  selector:
+    run: library-backend
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  namespace: sandbox
+  name: library-backend-ingress
+spec:
+  rules:
+    - host: app.library.backend.otus
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: library-backend
+                port:
+                  number: 8080
