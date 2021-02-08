@@ -1,0 +1,109 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: prometheus
+rules:
+  - apiGroups: [""]
+    resources:
+      - nodes
+      - services
+      - endpoints
+      - pods
+    verbs: ["get", "list", "watch"]
+  - apiGroups: [""]
+    resources:
+      - configmaps
+    verbs: ["get"]
+  - nonResourceURLs: ["/metrics", "/actuator/metrics", "/actuator/prometheus"]
+    verbs: ["get"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: prometheus
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: prometheus
+subjects:
+  - kind: ServiceAccount
+    name: prometheus
+    namespace: sandbox
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: prometheus-config
+  namespace: sandbox
+data:
+  prometheus.yml: |
+    global:
+      scrape_interval: 15s # By default, scrape targets every 15seconds. # Attach these labels to any time series or alerts when #communicating with external systems (federation, remote storage, #Alertmanager).
+      external_labels:
+        monitor: 'codelab-monitor'
+    # Scraping Prometheus itself
+    scrape_configs:
+    - job_name: 'prometheus'
+      scrape_interval: 5s
+      static_configs:
+      - targets: ['localhost:9090']
+    - job_name: 'scrape-library-backend-app'
+      scrape_interval: 5s
+      static_configs:
+      - targets: ['app.library.backend.otus']
+      metrics_path: '/actuator/prometheus'
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: prometheus
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prometheus-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: prometheus
+  template:
+    metadata:
+      labels:
+        app: prometheus
+    spec:
+      containers:
+        - name: prometheus-cont
+          image: prom/prometheus
+          volumeMounts:
+            - name: config-volume
+              mountPath: /etc/prometheus
+          ports:
+            - containerPort: 9090
+          resources:
+            limits:
+              cpu: '500m'
+              memory: 512Mi
+            requests:
+              cpu: 250m
+              memory: 256Mi
+      volumes:
+        - name: config-volume
+          configMap:
+            name: prometheus-config
+      serviceAccountName: prometheus
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: prometheus-service
+spec:
+  selector:
+    app: prometheus
+  ports:
+    - name: promui
+      nodePort: 30040
+      protocol: TCP
+      port: 9090
+      targetPort: 9090
+  type: NodePort
